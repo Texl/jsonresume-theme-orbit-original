@@ -3,6 +3,16 @@ var path = require('path');
 var Handlebars = require("handlebars");
 var utils = require('handlebars-utils');
 var marked = require('marked').marked;
+var luxon = require('luxon');
+
+
+Handlebars.registerHelper('is', function(value, test, options) {
+    return (value && value === test) ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper('isnt', function(value, test, options) {
+    return (!value || value !== test) ? options.fn(this) : options.inverse(this);
+});
 
 Handlebars.registerHelper('markdown', function(str, locals, options) {
 	if (typeof str !== 'string') {
@@ -29,17 +39,16 @@ Handlebars.registerHelper('markdown', function(str, locals, options) {
 });
 
 Handlebars.registerHelper('displayUrl', function(str) {
-	return str.replace(/https?:\/\//, "");
+	return str.replace(/https?:\/\/(www\.)?/, "");
 });
 
 Handlebars.registerHelper('toLowerCase', function(str) {
 	return str.toLowerCase();
 });
 
-Handlebars.registerHelper('year', function(str) {
+Handlebars.registerHelper('formatDate', function(str) {
 	if (str) {
-		var d = new Date(str);
-		return d.getFullYear();
+		return luxon.DateTime.fromISO(str).toFormat('M/y');
 	} else {
 		return "Present"
 	}
@@ -70,54 +79,10 @@ Handlebars.registerHelper('skillLevel', function(str) {
 	}
 });
 
-// Resume.json used to have website property in some entries.  This has been renamed to url.
-// However the demo data still uses the website property so we will also support the "wrong" property name.
-// Fix the resume object to use url property
-function fixResume(resume) {
-	if (resume.basics.website) {
-		resume.basics.url = resume.basics.website;
-		delete resume.basics.website
-	}
-	fixAllEntries(resume.work);
-	fixAllEntries(resume.volunteer);
-	fixAllEntries(resume.publications);
-	fixAllEntries(resume.projects);
-
-	fixWork(resume.work);
-}
-
-function fixAllEntries(entries) {
-	if (entries) {
-		for (var i=0; i < entries.length; i++) {
-			var entry = entries[i];
-			if (entry.website) {
-				entry.url = entry.website;
-				delete entry.website;
-			}
-		}
-	}
-}
-
-// work.company has been renamed as work.name in v1.0.0
-function fixWork(work) {
-	if (work) {
-		for (var i=0; i < work.length; i++) {
-			var entry = work[i];
-			if (entry.company) {
-				entry.name = entry.company;
-				delete entry.website;
-			}
-		}
-
-	}
-}
-
 function render(resume) {
 	var css = fs.readFileSync(__dirname + "/assets/css/styles.css", "utf-8");
 	var js = fs.readFileSync(__dirname + "/assets/js/main.js", "utf-8");
 	var tpl = fs.readFileSync(__dirname + "/resume.hbs", "utf-8");
-
-	fixResume(resume);
 
 	var partialsDir = path.join(__dirname, 'partials');
 	var filenames = fs.readdirSync(partialsDir);
@@ -147,5 +112,17 @@ function render(resume) {
 }
 
 module.exports = {
-	render: render
+	render: render,
+	pdfRenderOptions: {
+		format: 'letter',
+		mediaType: 'print',
+		pdfViewport: { width: 960, height: 1260 },
+		scale: 0.8,
+		margin: {
+			top: '0.25in',
+			bottom: '0.25in',
+			left: '0.25in',
+			right: '0.25in',
+		},
+	},
 };

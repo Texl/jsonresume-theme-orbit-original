@@ -1,12 +1,17 @@
-@sidebar-width: 240px;
+@sidebar-width: 250px;
 @sidebar-minheight: 800px;
+@padding: 20px;
 
 /* ======= Base ======= */
+html {
+    font-size: 16px;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;  
+    font-family: 'Fira Sans', sans-serif;  
     color: @text-color-secondary;
     background: @smoky-white;
-    font-size: 14px;
+    font-size: 0.875rem;
     padding: 30px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -32,12 +37,19 @@ p {
     line-height: 1.5;
 }
 
+ul {
+    padding-left: 1.25rem;
+}
+
+.indent {
+    margin-left: 1rem;
+}
+
 .wrapper {
     background:@theme-color;
     max-width: 960px;
     margin: 0 auto;
     position: relative;
-    .box-shadow(0px 2px 4px rgba(0,0,0,0.1));
 }
 
 .sidebar-wrapper {
@@ -52,58 +64,55 @@ p {
         color: #fff;
     }
     .profile-container {
-        padding: 30px;
-        //background: darken(@theme-color, 10%);
+        padding: 20px;
+        background: darken(@theme-color, 10%);
         background: rgba(0, 0, 0, 0.2);
         text-align: center;
         color: #fff;
     }
     .name {
-        font-size: 32px;
+        text-transform: uppercase;
+        font-size: 2rem;
         font-weight: 900;
         margin-top: 0;
         margin-bottom: 10px;
     }
     .tagline {
         color: rgba(256, 256, 256, 0.6);
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: 400;
         margin-top: 0;
         margin-bottom: 0;
     }
     .profile {
+        outline: 1px solid white;
+        border: 1px solid black;
+        border-radius: 0.5rem;
         margin-bottom: 15px;
     }
     .contact-list {
-        .fa {
-            margin-right: 5px;
-            font-size: 18px;
-            vertical-align: middle;
-        }
         li {
             margin-bottom: 15px;
             &:last-child {
                 margin-bottom: 0;
             }
         }
-        .email {
-            .fa {
-                font-size: 14px;
-            }
-        }
     }
     .container-block {
-        padding: 30px;
+        padding: 15px;
     }
     .container-block-title {
         text-transform: uppercase;
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: 700;
         margin-top: 0;
         margin-bottom: 15px;
     }
+    .contact-container {
+        padding-left: 5px;
+    }
     .degree {
-        font-size: 14px;
+        font-size: 0.875rem;
         margin-top: 0;
         margin-bottom: 5px;
     }
@@ -116,6 +125,7 @@ p {
         }
         .meta {
             color: rgba(256, 256, 256, 0.6);
+            font-size: 0.875rem;
             font-weight: 500;
             margin-bottom: 0px;
             margin-top: 0;
@@ -155,40 +165,37 @@ p {
 
 .main-wrapper {
     background: #fff;
-    padding: 60px;
-    padding-right: @sidebar-width + 60px;
+    padding: @padding;
+    padding-right: @sidebar-width + @padding;
+    padding-bottom: 0px;
     min-height: @sidebar-minheight;
     .section-title {
         text-transform: uppercase;
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: 500;
         color: darken(@theme-color, 15%);
         position: relative;
         margin-top: 0;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         .fa {
-            width: 30px;
-            height: 30px;
-            margin-right: 8px;
-            display: inline-block;
-            color: #fff;
-            .border-radius(50%);
-            background: darken(@theme-color, 15%);
-            text-align: center;
-            padding-top: 8px;
-            font-size: 16px;
-            position: relative;
-            top: -2px;
+            &:first-child {
+                color: darken(@theme-color, 15%);
+            }
+            top: -0.125rem;
         }
 
     }
     .section {
-        margin-bottom: 60px;
+        padding-top: 2px;
+        margin-bottom: @padding;
+        &:last-child {
+            margin-bottom: 0px;
+        }
     }
     
-    .experiences-section {
+    .experience-section {
         .item {
-            margin-bottom: 30px;
+            margin-bottom: @padding;
         }
     }
     .upper-row {
@@ -198,7 +205,7 @@ p {
     }
     .job-title {
         color: @text-color;
-        font-size: 16px;
+        font-size: 1rem;
         margin-top: 0;
         margin-bottom: 0;
         font-weight: 500;
@@ -210,35 +217,69 @@ p {
         color: @text-grey;
     }
     .company {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         color: @text-grey;
     }
     
+    .projects-section {
+        .intro {
+            margin-bottom: @padding;
+        }
+        .two-columns {
+            column-count: 2;
+        }
+        .projects {
+            .item {
+                margin-bottom: 15px;
+                break-inside: avoid;
+            }
+        }
+    }
     .project-title {
-        font-size: 16px;
-        font-weight: 400;
+        color: @text-color;
+        font-size: 1rem;
+        font-weight: 500;
         margin-top: 0;
         margin-bottom: 5px;
     }
-    .projects-section {
-        .intro {
-            margin-bottom: 30px;
-        }
-        .item {
-            margin-bottom: 15px;
-        }
+    .project-entity {
+        color: @text-grey;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+}
+
+.label-keyword {
+    display: inline-block;
+    background: #fff;
+    color: darken(@text-grey, 20%);
+    font-weight: 400;
+    font-size: 0.8125rem;
+    padding: 3px;
+    border: 1px solid @text-grey;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    line-height: 1em;
+    &:last-child {
+        margin-right: 0;
     }
     
 }
 
 
-.skillset {
+.skills {
+    column-count: 2;
+
     .item {
+        line-height: 1;
         margin-bottom: 15px;
         overflow: hidden;
+        break-inside: avoid;
     }
     .level-title {
-        font-size: 14px;
+        font-size: 0.875rem;
         margin-top: 0;
         margin-bottom: 12px;
     }
@@ -256,12 +297,12 @@ p {
 
 
 .footer {
-    padding: 30px;
-    padding-top: 60px;
+    padding: 20px;
+    padding-top: @padding;
     .copyright {
         line-height: 1.6;
         color: @text-color-secondary;
-        font-size: 13px;       
+        font-size: 0.8125rem;       
     }  
     
     .fa-heart {

@@ -1,63 +1,54 @@
-/* Extra small devices (phones, less than 768px) */
-@media (max-width: 767px) { 
-    
+@media screen {
+    .wrapper {
+        .box-shadow(0px 2px 4px rgba(0,0,0,0.1));
+    }
+}
+
+@media print {
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        padding: 0px;
+    }
+
+    .main-wrapper.section {
+        break-inside: avoid;
+    }
+
     .sidebar-wrapper {
-        position: static;
-        width: inherit;
-    }
-    
-    .main-wrapper {
-        padding: 30px;
-    }
-    
-    .main-wrapper .time {
-        position: static;
-        display: block;
-        margin-top: 5px;
-    }
-    
-    .main-wrapper .upper-row {
-        margin-bottom: 0;
+        outline: 2px solid black;
+        outline-offset: -2px;
+        border-radius: 1rem;
+
+        .profile-container {
+            outline: 2px solid black;
+            outline-offset: -2px;
+            border-radius: 1rem 1rem 0rem 0rem;
+        }
     }
 
+    a[href]:after {
+        content: "";
+    }
 
+    .fa-stack>.fa {
+        outline: 2px solid black;
+        outline-offset: -4px;
+        border-radius: 25%;
+
+        &:first-child {
+            display: none !important;
+        }
+    }
+
+    *,
+    *:before,
+    *:after {
+        background: inherit !important;
+        color: inherit !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
 }
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
-     
-    
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-    
-    .skillset .level-title {
-        display: inline-block;
-        float: left;
-        width: 30%;
-        margin-bottom: 0;
-    }
-    
-    .skillset .level-bar {
-        display: inline-block;
-        width: 70%;
-        float: left;
-        position: relative;
-        top: 1px;
-    }
-    
-    
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-
-}
-
-
-/* Ex-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1400px) {
-
-}
-
-

@@ -1,14 +1,53 @@
 {{#if resume.projects}}
     <section class="section projects-section">
-        <h2 class="section-title"><i class="fa fa-archive"></i>Projects</h2>
-        <!--                    <div class="intro">
-                                <p>You can list your side projects or open source libraries in this section. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ligula in nunc bibendum fringilla a eu lectus.</p>
-                            </div>--><!--//intro-->
-        {{#resume.projects}}
+        <h2 class="section-title">
+            <span class="fa-stack">
+                <i class="fa fa-square fa-stack-2x"></i>
+                <i class="fa fa-gamepad fa-stack-1x fa-inverse"></i>
+            </span>
+            Projects
+        </h2>
+        {{#if resume.projects.[1]}}
+        <div class="projects two-column">
+        {{else}}
+        <div class="projects">
+        {{/if}}
+            {{#resume.projects}}
+            {{#isnt hidden true}}
             <div class="item">
-                <span class="project-title"><a href="{{url}}" target="_blank">{{name}}</a></span> -
-                <span class="project-tagline">{{#markdown}}{{description}}{{/markdown}}</span>
+                <div class="project-title">
+                    {{#if entity}}<span class="project-entity">{{entity}} - </span>{{/if}}
+                    {{#if url}}<a href="{{url}}" target="_blank">{{/if}}{{name}}{{#if url}}</a>{{/if}}
+                </div>
+
+                <div class="indent">
+                    <div class="project-tagline">
+                        {{#markdown}}{{description}}{{/markdown}}
+                    </div>
+
+                    {{#if highlights}}
+                    <div class="highlights">
+                        <ul>
+                            {{#highlights}}
+                            <li>{{this}}</li>
+                            {{/highlights}}
+                        </ul>
+                    </div><!--//highlights-->
+                    {{/if}}
+
+{{!--                     {{#if keywords}}
+                    <div class="labels">
+                        {{#keywords}}
+                        <span class="label label-default label-keyword">{{this}}</span>
+                        {{/keywords}}
+                    </div><!--//labels-->
+                    {{/if}}
+ --}}
+                </div>
+
             </div><!--//item-->
-        {{/resume.projects}}
+            {{/isnt}}
+            {{/resume.projects}}
+        </div><!--//projects-->
     </section><!--//section-->
 {{/if}}

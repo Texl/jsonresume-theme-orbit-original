@@ -1,6 +1,12 @@
 {{#if resume.basics.summary}}
     <section class="section summary-section">
-        <h2 class="section-title"><i class="fa fa-user"></i>Career Profile</h2>
+        <h2 class="section-title">
+            <span class="fa-stack">
+                <i class="fa fa-square fa-stack-2x"></i>
+                <i class="fa fa-user fa-stack-1x fa-inverse"></i>
+            </span>
+            Career Profile
+        </h2>
         <div class="summary">
             <p>{{#markdown}}{{resume.basics.summary}}{{/markdown}}</p>
         </div><!--//summary-->

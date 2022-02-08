@@ -1,20 +1,46 @@
 {{#if resume.work}}
-    <section class="section experiences-section">
-        <h2 class="section-title"><i class="fa fa-briefcase"></i>Experiences</h2>
+    <section class="section experience-section">
+
+        <h2 class="section-title">
+            <span class="fa-stack">
+                <i class="fa fa-square fa-stack-2x"></i>
+                <i class="fa fa-briefcase fa-stack-1x fa-inverse"></i>
+            </span>
+            Experience
+        </h2>
 
         {{#resume.work}}
-            <div class="item">
-                <div class="meta">
-                    <div class="upper-row">
-                        <h3 class="job-title">{{position}}</h3>
-                        <div class="time">{{year startDate}} - {{year endDate}}</div>
-                    </div><!--//upper-row-->
-                    <div class="company">{{#if url}}<a href="{{url}}" target="_blank">{{/if}}{{name}}{{#if location}}, {{location}}{{/if}}{{#if url}}</a>{{/if}}</div>
-                </div><!--//meta-->
-                <div class="details">
-                    {{#markdown}}{{summary}}{{/markdown}}
-                </div><!--//details-->
-            </div><!--//item-->
+        <div class="item">
+            
+            <div class="meta">
+                <div class="upper-row">
+                    <h3 class="job-title">{{position}}</h3>
+                    <div class="time">{{formatDate startDate}} - {{formatDate endDate}}</div>
+                </div><!--//upper-row-->
+                <div class="company">{{#if url}}<a href="{{url}}" target="_blank">{{/if}}{{name}}{{#if location}} - {{location}}{{/if}}{{#if url}}</a>{{/if}}</div>
+            </div><!--//meta-->
+            
+            <div class="details indent">
+                {{#markdown}}{{summary}}{{/markdown}}
+                {{#if highlights}}
+                <ul>
+                    {{#highlights}}
+                    <li>{{this}}</li>
+                    {{/highlights}}
+                </ul>
+                {{/if}}
+            </div><!--//details-->
+            
+            {{#if keywords}}
+            <div class="labels">
+                {{#keywords}}
+                <span class="label label-default label-keyword">{{this}}</span>
+                {{/keywords}}
+            </div><!--//labels-->
+            {{/if}}
+            
+            <div class="clearfix"></div>
+        </div><!--//item-->
         {{/resume.work}}
     </section><!--//section-->
 {{/if}}
